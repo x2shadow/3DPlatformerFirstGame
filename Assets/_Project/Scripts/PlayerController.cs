@@ -18,7 +18,7 @@ namespace Platformer
 
         [Header("Settings")]
         [SerializeField] float moveSpeed = 6f;
-        [SerializeField] float rotationSpeed = 15f;
+        [SerializeField] float rotationSpeed = 12f;
         [SerializeField] float smoothTime = 0.2f;
 
         [Header("Jump Settings")]
@@ -112,7 +112,6 @@ namespace Platformer
 
         void HandleJump()
         {
-
             // If not jumping and grounded, keep jump velocity at 0
             if (!jumpTimer.IsRunning && groundChecker.IsGrounded)
             {
@@ -146,7 +145,6 @@ namespace Platformer
 
             // Apply velocity
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
-            
         }
 
         private void UpdateAnimator()
@@ -185,8 +183,8 @@ namespace Platformer
         {
             // Adjust rotation to match movement direction
             var targetRotation = Quaternion.LookRotation(adjustedDirection);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            transform.LookAt(transform.position + adjustedDirection);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // rotationSpeed = 800f;
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         void SmoothSpeed(float value)
