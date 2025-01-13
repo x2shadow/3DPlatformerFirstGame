@@ -26,6 +26,16 @@ namespace Platformer
                 inputActions.Player.SetCallbacks(this);
             }
         }
+    
+        void OnDisable()
+        {
+            if (inputActions != null)
+            {
+                inputActions.Disable();
+                inputActions.Player.SetCallbacks(null); // Удаление ссылок на текущие обработчики
+            }
+        }
+
 
         public void EnablePlayerActions()
         {

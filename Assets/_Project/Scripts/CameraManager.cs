@@ -18,6 +18,13 @@ namespace Platformer
         bool isRMBPressed;
         bool cameraMovementLock;
 
+        void Start()
+        {
+            // Lock the cursor to the center of the screen and hide it
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
+        }
+
         void OnEnable()
         {
             input.Look += OnLook;

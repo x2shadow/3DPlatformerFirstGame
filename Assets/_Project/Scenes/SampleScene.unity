@@ -2012,7 +2012,7 @@ MonoBehaviour:
   freeLookVCam: {fileID: 355828751}
   input: {fileID: 11400000, guid: 280f47c183f8cd14b85a59432085eeab, type: 2}
   moveSpeed: 300
-  rotationSpeed: 15
+  rotationSpeed: 12
   smoothTime: 0.2
   jumpForce: 10
   jumpDuration: 0.5
@@ -2072,7 +2072,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.6
+  m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!114 &1949842557
