@@ -15,3 +15,5 @@ Our first 3D Platformer game
 
 1. Go to Tools -> Setup -> Import My Favorite Assets
 
+**Note:** Probably delete "MyTools" folder completely
+

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Cinemachine;
 using KBCore.Refs;
 using UnityEngine;
@@ -9,6 +10,10 @@ namespace Platformer
 {
     public class PlayerController : ValidatedMonoBehaviour
     {
+        [SerializeField] PlatformCollisionHandler platformCollisionHandler;
+        [SerializeField] PlatformMover platformMoverDirect;
+        [SerializeField] MovingPlatform movingPlatform;
+
         [Header("References")]
         [SerializeField, Self] Rigidbody rb;
         [SerializeField, Self] GroundChecker groundChecker;
@@ -48,6 +53,7 @@ namespace Platformer
             mainCam = Camera.main.transform;
             freeLookVCam.Follow = transform;
             freeLookVCam.LookAt = transform;
+
             // Invoke event when observed transform is teleported, adjusting freeLookVCam's position accordingly
             freeLookVCam.OnTargetObjectWarped(
                 transform,
@@ -64,7 +70,10 @@ namespace Platformer
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
         }
 
-        void Start() => input.EnablePlayerActions();
+        void Start()
+        {
+            input.EnablePlayerActions();
+        }
 
         void OnEnable()
         {
@@ -98,8 +107,23 @@ namespace Platformer
 
         void FixedUpdate()
         {
-            HandleJump();
             HandleMovement();
+            ApplyPlatformVelocity();
+            HandleJump();
+            ApplyGravity();
+        }
+
+        void ApplyPlatformVelocity()
+        {
+            if (platformCollisionHandler.IsOnPlatform)
+            {
+                //rb.velocity += platformCollisionHandler.movingPlatform.platformVelocity;
+                
+                rb.velocity = new Vector3(rb.velocity.x + platformCollisionHandler.movingPlatform.platformVelocity.x,
+                                            platformCollisionHandler.movingPlatform.platformVelocity.y,
+                                            rb.velocity.z + platformCollisionHandler.movingPlatform.platformVelocity.z);
+                                            
+            }
         }
 
         void HandleTimers()
@@ -112,39 +136,40 @@ namespace Platformer
 
         void HandleJump()
         {
-            // If not jumping and grounded, keep jump velocity at 0
-            if (!jumpTimer.IsRunning && groundChecker.IsGrounded)
-            {
-                jumpVelocity = 0f;
-                jumpTimer.Stop();
-                return;
-            }
+            if (HandleGroundedState()) return;
 
-            // If jumping or falling calculate velocity
             if (jumpTimer.IsRunning)
             {
-                // Progress point for initial burst of velocity
-                float launchPoint = 0.9f;
-
-                if (jumpTimer.Progress > launchPoint)
-                {
-                    // Calculate the velocity required to reach the jump height using physics equations v = sqrt(2gh)
-                    jumpVelocity = Mathf.Sqrt(2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
-                }
-                else
-                {
-                    // Gradually apply less velocity as the jump progresses
-                    jumpVelocity += (1 - jumpTimer.Progress) * jumpForce * Time.fixedDeltaTime;
-                }
+                // Устанавливаем начальную скорость прыжка
+                jumpVelocity = Mathf.Sqrt(2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
+                
+                // Прекращаем прыжковый таймер, так как импульс уже задан
+                jumpTimer.Stop();
             }
+
+            if (platformCollisionHandler.IsOnPlatform)
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + jumpVelocity, rb.velocity.z);
             else
+                rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
+        }
+
+        void ApplyGravity()
+        {
+            if (!groundChecker.IsGrounded && !jumpTimer.IsRunning)
             {
-                // Gravity takes over
                 jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
             }
+        }
 
-            // Apply velocity
-            rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
+        bool HandleGroundedState()
+        {
+            if (groundChecker.IsGrounded && !jumpTimer.IsRunning)
+            {
+                jumpVelocity = 0f;
+                //jumpVelocity = platformCollisionHandler.movingPlatform ? platformCollisionHandler.movingPlatform.platformVelocity.y : 0f;
+                return true;
+            }
+            return false;
         }
 
         private void UpdateAnimator()
@@ -183,7 +208,6 @@ namespace Platformer
         {
             // Adjust rotation to match movement direction
             var targetRotation = Quaternion.LookRotation(adjustedDirection);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // rotationSpeed = 800f;
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 

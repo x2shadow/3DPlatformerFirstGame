@@ -1,11 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace Platformer
 {
     public class PlatformCollisionHandler : MonoBehaviour
     {
-        Transform platform; // The platform, if any, we are on top of
-
+        public PlatformMover platformMover;
+        public MovingPlatform movingPlatform;
+        public bool IsOnPlatform;
+        
         void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("MovingPlatform"))
@@ -14,8 +17,7 @@ namespace Platformer
                 ContactPoint contact = other.GetContact(0);
                 if (contact.normal.y < 0.5f) return;
                 
-                platform = other.transform;
-                transform.SetParent(platform);
+                
             }            
         }
         
@@ -23,8 +25,8 @@ namespace Platformer
         {
             if (other.gameObject.CompareTag("MovingPlatform"))
             {
-                platform = null;
-                transform.SetParent(null);
+                //platformMover = null;
+                //movingPlatform = null;
             }            
         }
     }

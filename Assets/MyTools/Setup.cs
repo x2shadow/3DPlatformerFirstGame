@@ -16,7 +16,8 @@ public static class Setup
     [MenuItem("Tools/Setup/Import My Favorite Assets")]
     public static void ImportMyFavoriteAssets()
     {
-        Assets.ImportAsset("DOTween HOTween v2.unitypackage", "Demigiant/Editor ExtensionsAnimation");
+        Debug.Log("Not Implemented");
+        //Assets.ImportAsset("DOTween HOTween v2.unitypackage", "Demigiant/Editor ExtensionsAnimation");
     }
 
     static class Folders
@@ -39,7 +40,7 @@ public static class Setup
 
     public static class Assets
     {
-        public static void ImportAsset(string asset, string subfolder, string folder = "C:/Users/hahan/AppData/Roaming/Unity/Asset Store-5.x")
+        public static void ImportAsset(string asset, string subfolder, string folder = "C:/Users/USERNAME/AppData/Roaming/Unity/Asset Store-5.x")
         {
             AssetDatabase.ImportPackage(Combine(folder, subfolder, asset), false);
         }

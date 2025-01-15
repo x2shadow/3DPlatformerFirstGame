@@ -12,6 +12,17 @@ namespace Platformer
 
         Vector3 startPosition;
 
+        public Vector3 platformVelocity; // Скорость платформы
+        Vector3 lastPlatformPosition; // Позиция платформы в предыдущем кадре
+
+        void FixedUpdate()
+        {
+            // Рассчитываем скорость платформы
+            Vector3 currentPlatformPosition = transform.position;
+            platformVelocity = (currentPlatformPosition - lastPlatformPosition) / Time.fixedDeltaTime;
+            lastPlatformPosition = currentPlatformPosition;
+        }
+
         void Start()
         {
             startPosition = transform.position;
