@@ -3,18 +3,27 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public Vector3 startPosition;
-    public Vector3 endPosition;
+    Vector3 startPosition;
+    Vector3 endPosition;
+
+    [SerializeField] Transform target;
+
     public float speed = 2f;
 
     private Vector3 direction;
     private Vector3 previousPosition;
 
-    public Vector3 platformVelocity; // Скорость платформы
+    [HideInInspector]
+    public Vector3 platformVelocity; // Вектор скорости платформы
 
     private void Start()
     {
         startPosition = transform.position;
+        endPosition   = target.position;
+
+        //Отключаем конечное положение
+        target.gameObject.SetActive(false);
+
         previousPosition = startPosition;
         direction = (endPosition - startPosition).normalized;
     }
@@ -36,5 +45,19 @@ public class MovingPlatform : MonoBehaviour
     public Vector3 GetPlatformMovement()
     {
         return transform.position - previousPosition;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (target != null)
+        {
+            // Установить цвет Gizmos для платформы
+            Gizmos.color = Color.cyan;
+
+            // Если игра не запущена, используем позицию target
+            Vector3 positionToDraw = Application.isPlaying ? endPosition : target.position;
+
+            Gizmos.DrawWireCube(positionToDraw, target.localScale);
+        }
     }
 }

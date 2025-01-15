@@ -10,14 +10,12 @@ namespace Platformer
 {
     public class PlayerController : ValidatedMonoBehaviour
     {
-        [SerializeField] PlatformCollisionHandler platformCollisionHandler;
-        [SerializeField] PlatformMover platformMoverDirect;
-        [SerializeField] MovingPlatform movingPlatform;
 
         [Header("References")]
         [SerializeField, Self] Rigidbody rb;
         [SerializeField, Self] GroundChecker groundChecker;
         [SerializeField, Self] Animator animator;
+        [SerializeField, Self] PlatformCollisionHandler platformCollisionHandler;
         [SerializeField, Anywhere] CinemachineFreeLook freeLookVCam;
         [SerializeField, Anywhere] InputReader input;
 
@@ -27,7 +25,7 @@ namespace Platformer
         [SerializeField] float smoothTime = 0.2f;
 
         [Header("Jump Settings")]
-        [SerializeField] float jumpForce = 10f;
+        //[SerializeField] float jumpForce = 10f;
         [SerializeField] float jumpDuration = 0.5f;
         [SerializeField] float jumpCooldown = 0f;
         [SerializeField] float jumpMaxHeight = 2f;

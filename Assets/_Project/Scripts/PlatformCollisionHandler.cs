@@ -5,29 +5,27 @@ namespace Platformer
 {
     public class PlatformCollisionHandler : MonoBehaviour
     {
-        public PlatformMover platformMover;
         public MovingPlatform movingPlatform;
         public bool IsOnPlatform;
         
-        void OnCollisionEnter(Collision other)
+        void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("MovingPlatform"))
+            if (other.CompareTag("MovingPlatform"))
             {
-                // If the contact normal is pointing up, we've collided with the top of the platform
-                ContactPoint contact = other.GetContact(0);
-                if (contact.normal.y < 0.5f) return;
-                
-                
-            }            
+                //Debug.Log("На платформе");
+                IsOnPlatform = true;
+                movingPlatform = other.gameObject.GetComponentInParent<MovingPlatform>();
+            }
         }
-        
-        void OnCollisionExit(Collision other)
+
+        void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.CompareTag("MovingPlatform"))
+            if (other.CompareTag("MovingPlatform"))
             {
-                //platformMover = null;
-                //movingPlatform = null;
-            }            
+                //Debug.Log("Сошел с платформы");
+                IsOnPlatform = false;
+                movingPlatform = null;
+            }
         }
     }
 }

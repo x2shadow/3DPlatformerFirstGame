@@ -17,14 +17,14 @@ namespace Platformer
 
         void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, groundDistance);
-            
             if (IsGrounded)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundDistance);
+                //Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundDistance);
             }
+            else Gizmos.color = Color.red;
+
+            Gizmos.DrawWireSphere(transform.position, groundDistance);
         }
     }
 }
