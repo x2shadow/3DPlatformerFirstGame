@@ -1050,9 +1050,9 @@ GameObject:
   - component: {fileID: 479170929}
   - component: {fileID: 479170930}
   - component: {fileID: 479170931}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Trigger
-  m_TagString: MovingPlatform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1117,9 +1117,9 @@ GameObject:
   - component: {fileID: 586513467}
   - component: {fileID: 586513469}
   - component: {fileID: 586513468}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Trigger
-  m_TagString: MovingPlatform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
