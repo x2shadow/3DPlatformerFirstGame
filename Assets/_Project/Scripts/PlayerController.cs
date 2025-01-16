@@ -10,7 +10,6 @@ namespace Platformer
 {
     public class PlayerController : ValidatedMonoBehaviour
     {
-
         [Header("References")]
         [SerializeField, Self] Rigidbody rb;
         [SerializeField, Self] GroundChecker groundChecker;
@@ -30,16 +29,20 @@ namespace Platformer
         [SerializeField] float jumpCooldown = 0f;
         [SerializeField] float jumpMaxHeight = 2f;
         [SerializeField] float gravityMultiplier = 3f;
+        [SerializeField] float jumpingPlatformBoost = 40f;
+        bool isBoosted;
 
         Transform mainCam;
 
         float currentSpeed;
         float velocity;
-        float jumpVelocity;
+        float boostVelocity;
+
 
         Vector3 movement;
 
         List<Timer> timers;
+        CountdownTimer boostTimer;
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
 
@@ -62,8 +65,9 @@ namespace Platformer
 
             // Setup timers
             jumpTimer = new CountdownTimer(jumpDuration);
+            boostTimer = new CountdownTimer(jumpDuration);
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-            timers = new List<Timer>(capacity:2) { jumpTimer, jumpCooldownTimer };
+            timers = new List<Timer>(capacity:2) { jumpTimer, jumpCooldownTimer, boostTimer };
 
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
         }
@@ -108,20 +112,30 @@ namespace Platformer
             HandleMovement();
             ApplyPlatformVelocity();
             HandleJump();
+            ApplyJumpingPlatformBoost();
             ApplyGravity();
         }
 
         void ApplyPlatformVelocity()
         {
-            if (platformCollisionHandler.IsOnPlatform)
-            {
-                //rb.velocity += platformCollisionHandler.movingPlatform.platformVelocity;
-                
-                rb.velocity = new Vector3(rb.velocity.x + platformCollisionHandler.movingPlatform.platformVelocity.x,
-                                            platformCollisionHandler.movingPlatform.platformVelocity.y,
-                                            rb.velocity.z + platformCollisionHandler.movingPlatform.platformVelocity.z);
-                                            
-            }
+            if (!platformCollisionHandler.IsOnPlatform) return;
+
+            Vector3 platformVelocity = platformCollisionHandler.movingPlatform?.platformVelocity 
+                                    ?? platformCollisionHandler.fallingPlatform?.platformVelocity 
+                                    ?? platformCollisionHandler.jumpingPlatform?.platformVelocity
+                                    ?? platformCollisionHandler.rotatingPlatform?.platformVelocity 
+                                    ?? Vector3.zero;
+
+            // Синхронизируем вертикальную скорость только если игрок стоит на платформе и не прыгает
+            bool isGroundedOnPlatform = groundChecker.IsGrounded && !jumpTimer.IsRunning;
+
+            float newYVelocity = isGroundedOnPlatform ? platformVelocity.y : rb.velocity.y;
+
+            rb.velocity = new Vector3(
+                rb.velocity.x + platformVelocity.x,
+                newYVelocity,
+                rb.velocity.z + platformVelocity.z
+            );
         }
 
         void HandleTimers()
@@ -131,31 +145,64 @@ namespace Platformer
                 timer.Tick(Time.deltaTime);
             }
         }
-
+        
         void HandleJump()
         {
-            if (HandleGroundedState()) return;
+            if (isBoosted) return; // Если работает буст, игнорируем HandleJump
+
+            //if (HandleGroundedState()) return;
 
             if (jumpTimer.IsRunning)
             {
-                // Устанавливаем начальную скорость прыжка
-                jumpVelocity = Mathf.Sqrt(2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
-                
-                // Прекращаем прыжковый таймер, так как импульс уже задан
-                jumpTimer.Stop();
-            }
+                // Высчитываем фиксированную скорость прыжка
+                float initialJumpVelocity = Mathf.Sqrt(2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
 
-            if (platformCollisionHandler.IsOnPlatform)
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + jumpVelocity, rb.velocity.z);
-            else
-                rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
+                // Устанавливаем вертикальную скорость игрока относительно платформы
+                //float platformVerticalVelocity = platformCollisionHandler.movingPlatform?.platformVelocity.y ?? 0f;
+                //if (platformVerticalVelocity < 0f) platformVerticalVelocity = 0f;
+                float platformVerticalVelocity = platformCollisionHandler.movingPlatform?.speed ?? 0f;
+
+                rb.velocity = new Vector3(rb.velocity.x, initialJumpVelocity + platformVerticalVelocity, rb.velocity.z);
+
+                jumpTimer.Stop(); // Останавливаем таймер прыжка
+            }
         }
+
 
         void ApplyGravity()
         {
-            if (!groundChecker.IsGrounded && !jumpTimer.IsRunning)
+            if (!groundChecker.IsGrounded)
             {
-                jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+                // Добавляем гравитацию к текущей вертикальной скорости
+                float gravityForce = Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + gravityForce, rb.velocity.z);
+            }   
+            else
+            {
+                isBoosted = false; // Сброс бустового состояния
+            }
+        }
+
+        public void StartJumpingPlatformBoost()
+        {
+            if (!boostTimer.IsRunning)
+            {
+                boostTimer.Start();
+            }
+        }
+
+        public void ApplyJumpingPlatformBoost()
+        {
+            isBoosted = true; // Устанавливаем состояние буста
+
+            if (boostTimer.IsRunning)
+            {
+                // Устанавливаем начальную скорость
+                boostVelocity = Mathf.Sqrt(2 * jumpingPlatformBoost * Mathf.Abs(Physics.gravity.y));
+
+                rb.velocity = new Vector3(rb.velocity.x, boostVelocity, rb.velocity.z);
+                // Прекращаем таймер, так как импульс уже задан
+                boostTimer.Stop();
             }
         }
 
@@ -163,19 +210,18 @@ namespace Platformer
         {
             if (groundChecker.IsGrounded && !jumpTimer.IsRunning)
             {
-                jumpVelocity = 0f;
-                //jumpVelocity = platformCollisionHandler.movingPlatform ? platformCollisionHandler.movingPlatform.platformVelocity.y : 0f;
+                //jumpVelocity = 0f; 
                 return true;
             }
             return false;
         }
 
-        private void UpdateAnimator()
+        void UpdateAnimator()
         {
             animator.SetFloat(Speed, currentSpeed);
         }
 
-        private void HandleMovement()
+        void HandleMovement()
         {
             // Rotate movement direction to match camera rotation
             var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;

@@ -42,11 +42,6 @@ public class MovingPlatform : MonoBehaviour
         previousPosition = transform.position;
     }
 
-    public Vector3 GetPlatformMovement()
-    {
-        return transform.position - previousPosition;
-    }
-
     void OnDrawGizmos()
     {
         if (target != null)
