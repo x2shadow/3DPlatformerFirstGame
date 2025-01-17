@@ -36,31 +36,31 @@ public class FallingPlatform : ValidatedMonoBehaviour
 
     public void StartFallProcess()
     {
-        Debug.Log("StartFallProcess вызван");
+        //Debug.Log("StartFallProcess вызван");
 
         if (isFalling)
         {
-            Debug.LogWarning("Платформа уже падает!");
+            //Debug.LogWarning("Платформа уже падает!");
             return;
         }
 
-        Debug.Log("Игрок активировал падение платформы.");
+        //Debug.Log("Игрок активировал падение платформы.");
         Invoke(nameof(StartFalling), fallDelay);
         isFalling = true; // Проверяем, что это состояние изменяется
-        Debug.Log("isFalling: " + isFalling);
+        //Debug.Log("isFalling: " + isFalling);
     }
 
 
     private void StartFalling()
     {
-        Debug.Log("Платформа начинает падать.");
+        //Debug.Log("Платформа начинает падать.");
         rb.isKinematic = false;
         Invoke(nameof(Respawn), respawnDelay);
     }
 
     private void Respawn()
     {
-        Debug.Log("Платформа восстанавливается.");
+        //Debug.Log("Платформа восстанавливается.");
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.isKinematic = true;
@@ -68,7 +68,7 @@ public class FallingPlatform : ValidatedMonoBehaviour
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         isFalling = false;
-        Debug.Log("Платформа восстановлена.");
+        //Debug.Log("Платформа восстановлена.");
     }
 
 }
