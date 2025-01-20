@@ -21,8 +21,8 @@ namespace Platformer
         void Start()
         {
             // Lock the cursor to the center of the screen and hide it
-            //Cursor.lockState = CursorLockMode.Locked;
-            //Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         void OnEnable()

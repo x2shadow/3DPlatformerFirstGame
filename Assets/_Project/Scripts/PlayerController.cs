@@ -224,7 +224,8 @@ namespace Platformer
         void HandleMovement()
         {
             // Rotate movement direction to match camera rotation
-            var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
+            //var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
+            var adjustedDirection = movement;
 
             if (adjustedDirection.magnitude > 0f)
             {
