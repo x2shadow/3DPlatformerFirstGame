@@ -7,6 +7,6 @@ Our first 3D Platformer game
 - **Made in Unity 2022.3.55f1 with URP 3D Sample**
 - [Scene Reference Attribute by KyleBanks](https://github.com/KyleBanks/scene-ref-attribute)
 - NEW Unity Input System
-- Cinemachine
+- UniTask
 - TextMesh Pro
 

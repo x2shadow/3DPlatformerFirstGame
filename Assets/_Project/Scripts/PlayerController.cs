@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Cinemachine;
 using KBCore.Refs;
 using UnityEngine;
 using Utilities;
@@ -15,7 +14,6 @@ namespace Platformer
         [SerializeField, Self] GroundChecker groundChecker;
         [SerializeField, Self] Animator animator;
         [SerializeField, Self] PlatformCollisionHandler platformCollisionHandler;
-        [SerializeField, Anywhere] CinemachineFreeLook freeLookVCam;
         [SerializeField, Anywhere] InputReader input;
 
         [Header("Settings")]
@@ -52,6 +50,8 @@ namespace Platformer
         void Awake()
         {
             mainCam = Camera.main.transform;
+            
+            /*
             freeLookVCam.Follow = transform;
             freeLookVCam.LookAt = transform;
 
@@ -60,6 +60,7 @@ namespace Platformer
                 transform,
                 transform.position - freeLookVCam.transform.position - Vector3.forward
             );
+            */
 
             rb.freezeRotation = true;
 
@@ -224,8 +225,8 @@ namespace Platformer
         void HandleMovement()
         {
             // Rotate movement direction to match camera rotation
-            //var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
-            var adjustedDirection = movement;
+            var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
+            // var adjustedDirection = movement;
 
             if (adjustedDirection.magnitude > 0f)
             {
