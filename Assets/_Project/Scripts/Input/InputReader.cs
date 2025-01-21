@@ -94,7 +94,14 @@ namespace Platformer
 
         public void OnPause(InputAction.CallbackContext context)
         {
-            if(context.performed) Pause.Invoke();
+            if(context.performed)
+            {
+                if (!PauseManager.Instance.isPaused) 
+                    DisableMouseControlCamera.Invoke();
+                else 
+                    EnableMouseControlCamera.Invoke();
+                Pause.Invoke();
+            }
         }
     }
 }

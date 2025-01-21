@@ -21,7 +21,7 @@ namespace Platformer
         [SerializeField] float minY = 5f;
         [SerializeField] float maxY = 85f;
 
-        bool isRMBPressed = true;
+        //bool isRMBPressed = true;
         bool cameraMovementLock;
 
         Vector2 currentRotation; // Хранение текущей ориентации камеры
@@ -91,23 +91,25 @@ namespace Platformer
         void OnEnable()
         {
             input.Look += OnLook;
-            //input.EnableMouseControlCamera  += OnEnableMouseControlCamera;
-            //input.DisableMouseControlCamera += OnDisableMouseControlCamera;
+            input.EnableMouseControlCamera  += OnEnableMouseControlCamera;
+            input.DisableMouseControlCamera += OnDisableMouseControlCamera;
         }
 
         void OnDisable()
         {
             input.Look -= OnLook;
-            //input.EnableMouseControlCamera -= OnEnableMouseControlCamera;
-            //input.DisableMouseControlCamera -= OnDisableMouseControlCamera;
+            input.EnableMouseControlCamera -= OnEnableMouseControlCamera;
+            input.DisableMouseControlCamera -= OnDisableMouseControlCamera;
         }
 
         void OnLook(Vector2 cameraMovement, bool isDeviceMouse)
         {
             if (cameraMovementLock) return;
 
-            if (isDeviceMouse && !isRMBPressed) return;
+            //if (isDeviceMouse && !isRMBPressed) return;
 
+            if (PauseManager.Instance.isPaused) return;
+            
             // If the device is mouse use fixedDeltaTime, otherwise use deltaTime
             float deviceMultiplier = isDeviceMouse ? Time.fixedDeltaTime :  Time.deltaTime; //Time.fixedDeltaTime for all devices?
 
@@ -121,7 +123,7 @@ namespace Platformer
 
         public void OnEnableMouseControlCamera()
         {
-            isRMBPressed = true;
+            //isRMBPressed = true;
 
             // Lock the cursor to the center of the screen and hide it
             Cursor.lockState = CursorLockMode.Locked;
@@ -139,7 +141,7 @@ namespace Platformer
 
         public void OnDisableMouseControlCamera()
         {
-            isRMBPressed = false;
+            //isRMBPressed = false;
 
             // Lock the cursor to the center of the screen and hide it
             Cursor.lockState = CursorLockMode.None;

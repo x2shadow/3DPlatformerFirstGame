@@ -7,12 +7,25 @@ namespace Platformer
 {
     public class PauseManager : ValidatedMonoBehaviour
     {
+        public static PauseManager Instance;
+
         [Header("References")]
         [SerializeField, Anywhere] InputReader input;
-        [SerializeField] CameraManager cameraManager;
         [SerializeField] GameObject canvasPause;
 
         public bool isPaused;
+
+        void Awake()
+        {
+            if(Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
 
         void OnEnable()
         {
@@ -35,13 +48,11 @@ namespace Platformer
             {
                 isPaused = true;
                 canvasPause.SetActive(true);
-                cameraManager.OnDisableMouseControlCamera();
             }
             else
             {
                 isPaused = false;
                 canvasPause.SetActive(false);
-                cameraManager.OnEnableMouseControlCamera();
             }
         }
     }
