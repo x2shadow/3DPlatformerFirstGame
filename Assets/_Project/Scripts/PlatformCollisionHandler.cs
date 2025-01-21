@@ -31,7 +31,7 @@ namespace Platformer
 
             if (other.CompareTag("JumpingPlatform"))
             {
-                IsOnPlatform = true;
+                //IsOnPlatform = true;
                 GetComponent<PlayerController>().StartJumpingPlatformBoost();
                 jumpingPlatform = other.gameObject.GetComponentInParent<JumpingPlatform>();
             }
@@ -66,7 +66,7 @@ namespace Platformer
 
             if (other.CompareTag("RotatingPlatform"))
             {
-                IsOnPlatform = false;
+                //IsOnPlatform = false;
                 rotatingPlatform = null;
             }
         }

@@ -13,7 +13,7 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 direction;
     private Vector3 previousPosition;
 
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 platformVelocity; // Вектор скорости платформы
 
     private void Start()

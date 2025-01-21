@@ -50,17 +50,6 @@ namespace Platformer
         void Awake()
         {
             mainCam = Camera.main.transform;
-            
-            /*
-            freeLookVCam.Follow = transform;
-            freeLookVCam.LookAt = transform;
-
-            // Invoke event when observed transform is teleported, adjusting freeLookVCam's position accordingly
-            freeLookVCam.OnTargetObjectWarped(
-                transform,
-                transform.position - freeLookVCam.transform.position - Vector3.forward
-            );
-            */
 
             rb.freezeRotation = true;
 
@@ -178,10 +167,6 @@ namespace Platformer
                 float gravityForce = Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
                 rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + gravityForce, rb.velocity.z);
             }   
-            else
-            {
-                isBoosted = false; // Сброс бустового состояния
-            }
         }
 
         public void StartJumpingPlatformBoost()
@@ -194,16 +179,17 @@ namespace Platformer
 
         public void ApplyJumpingPlatformBoost()
         {
-            isBoosted = true; // Устанавливаем состояние буста
-
             if (boostTimer.IsRunning)
             {
+                isBoosted = true; // Устанавливаем состояние буста
+                
                 // Устанавливаем начальную скорость
                 boostVelocity = Mathf.Sqrt(2 * jumpingPlatformBoost * Mathf.Abs(Physics.gravity.y));
 
                 rb.velocity = new Vector3(rb.velocity.x, boostVelocity, rb.velocity.z);
                 // Прекращаем таймер, так как импульс уже задан
                 boostTimer.Stop();
+                isBoosted = false; // Сброс бустового состояния
             }
         }
 
