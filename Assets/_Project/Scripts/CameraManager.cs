@@ -21,7 +21,7 @@ namespace Platformer
         [SerializeField] float minY = 5f;
         [SerializeField] float maxY = 85f;
 
-        bool isRMBPressed;
+        bool isRMBPressed = true;
         bool cameraMovementLock;
 
         Vector2 currentRotation; // Хранение текущей ориентации камеры
@@ -106,7 +106,7 @@ namespace Platformer
         {
             if (cameraMovementLock) return;
 
-            //if (isDeviceMouse && !isRMBPressed) return;
+            if (isDeviceMouse && !isRMBPressed) return;
 
             // If the device is mouse use fixedDeltaTime, otherwise use deltaTime
             float deviceMultiplier = isDeviceMouse ? Time.fixedDeltaTime :  Time.deltaTime; //Time.fixedDeltaTime for all devices?
@@ -119,7 +119,7 @@ namespace Platformer
             currentRotation.y = Mathf.Clamp(currentRotation.y, minY, maxY); // Вертикальный угол
         }
 
-        private void OnEnableMouseControlCamera()
+        public void OnEnableMouseControlCamera()
         {
             isRMBPressed = true;
 
@@ -137,7 +137,7 @@ namespace Platformer
             cameraMovementLock = false;
         }
 
-        private void OnDisableMouseControlCamera()
+        public void OnDisableMouseControlCamera()
         {
             isRMBPressed = false;
 

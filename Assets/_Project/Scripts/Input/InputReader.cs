@@ -12,7 +12,9 @@ namespace Platformer
         public event UnityAction<Vector2, bool> Look = delegate { };
         public event UnityAction EnableMouseControlCamera = delegate { };
         public event UnityAction DisableMouseControlCamera = delegate { };
-        public event UnityAction<bool> Jump = delegate { };
+        public event UnityAction<bool> Jump  = delegate { };
+        public event UnityAction Pause = delegate { };
+
 
         PlayerInputActions inputActions;
 
@@ -88,6 +90,11 @@ namespace Platformer
         public void OnRun(InputAction.CallbackContext context)
         {
 
+        }
+
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            if(context.performed) Pause.Invoke();
         }
     }
 }

@@ -50,7 +50,11 @@ public class PlayerShadow : MonoBehaviour
                 MovingPlatform movingPlatform = hit.collider.GetComponent<MovingPlatform>();
                 if (movingPlatform != null)
                 {
-                    shadowPosition = new Vector3(shadowPosition.x, movingPlatform.gameObject.transform.position.y + 0.055f, shadowPosition.z);
+                    // Если игрок на платформе, привязываем тень к платформе
+                    Vector3 platformPosition = movingPlatform.transform.position;
+                    Vector3 playerOffset = player.position - platformPosition;
+                    
+                    shadowPosition = platformPosition + new Vector3(playerOffset.x, 0.055f, playerOffset.z);
                 }
                 
                 // Линейная интерполяция для осей X и Z
