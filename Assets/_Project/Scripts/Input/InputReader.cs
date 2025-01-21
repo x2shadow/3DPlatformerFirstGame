@@ -96,10 +96,10 @@ namespace Platformer
         {
             if(context.performed)
             {
-                if (!PauseManager.Instance.isPaused) 
-                    DisableMouseControlCamera.Invoke();
-                else 
-                    EnableMouseControlCamera.Invoke();
+                //if (!PauseManager.Instance.isPaused) 
+                //    DisableMouseControlCamera.Invoke();
+                //else 
+                //    EnableMouseControlCamera.Invoke();
                 Pause.Invoke();
             }
         }

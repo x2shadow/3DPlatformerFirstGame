@@ -11,6 +11,7 @@ namespace Platformer
 
         [Header("References")]
         [SerializeField, Anywhere] InputReader input;
+        [SerializeField] CameraManager cameraManager;
         [SerializeField] GameObject canvasPause;
 
         public bool isPaused;
@@ -42,17 +43,19 @@ namespace Platformer
             TogglePause();
         }
 
-        void TogglePause()
+        public void TogglePause()
         {
             if (!isPaused)
             {
                 isPaused = true;
                 canvasPause.SetActive(true);
+                cameraManager.OnDisableMouseControlCamera();
             }
             else
             {
                 isPaused = false;
                 canvasPause.SetActive(false);
+                cameraManager.OnEnableMouseControlCamera();
             }
         }
     }
