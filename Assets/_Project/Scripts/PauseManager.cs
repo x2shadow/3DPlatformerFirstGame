@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using KBCore.Refs;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Platformer
 {
@@ -57,6 +58,11 @@ namespace Platformer
                 canvasPause.SetActive(false);
                 cameraManager.OnEnableMouseControlCamera();
             }
+        }
+
+        public void LoadMainMenuScene()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

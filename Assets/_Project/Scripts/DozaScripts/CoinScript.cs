@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System.Threading;
+using Platformer;
 
 
 //spawn coins method
@@ -45,7 +46,8 @@ public class CoinScript : MonoBehaviour
             this.gameObject.GetComponent<Collider>().enabled = false;
             PlayerData.AddCoins(1);
             int n = PlayerData.GetCoinsNumber();
-            Debug.Log($"Добавлена 1 монета, Счёт:{n}");
+            CoinManager.Instance.SetCoinsNumber(n);
+            Debug.Log($"Р”РѕР±Р°РІР»РµРЅР° 1 РјРѕРЅРµС‚Р°, РЎС‡РµС‚:{n}");
             await PickUpAnimation();
         }
     }
