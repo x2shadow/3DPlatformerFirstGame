@@ -14,6 +14,8 @@ namespace Platformer
         [SerializeField, Anywhere] InputReader input;
         [SerializeField] CameraManager cameraManager;
         [SerializeField] GameObject canvasPause;
+        [SerializeField] GameObject canvasWin;
+        [SerializeField] GameObject canvasLose;
 
         public bool isPaused;
 
@@ -62,7 +64,29 @@ namespace Platformer
 
         public void LoadMainMenuScene()
         {
+            isPaused = false;
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public void ShowWin()
+        {
+            isPaused = true;
+            canvasWin.SetActive(true);
+            cameraManager.OnDisableMouseControlCamera();
+        }
+
+        public void ShowLose()
+        {
+            isPaused = true;
+            canvasLose.SetActive(true);
+            cameraManager.OnDisableMouseControlCamera();
+        }
+
+        public void CloseLose()
+        {
+            canvasLose.SetActive(false);
+            isPaused = false;
+            cameraManager.OnEnableMouseControlCamera();
         }
     }
 }
