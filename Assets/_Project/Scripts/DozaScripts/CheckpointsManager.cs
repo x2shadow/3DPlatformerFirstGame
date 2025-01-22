@@ -7,7 +7,9 @@ namespace Platformer
 {
     public class CheckpointsManager : MonoBehaviour
     {
-        [SerializeField] List<Checkpoint> checkpointList = new List<Checkpoint>();
+        [SerializeField] public List<Checkpoint> checkpointList = new List<Checkpoint>();
+        [SerializeField] GameObject deathBox;
+        public float deathBoxPositionY = 8f;
         public int lastCheckpointIndex;
         
         void Start()
@@ -24,6 +26,9 @@ namespace Platformer
             if (checkpoint == checkpointList.Last()) PauseManager.Instance.ShowWin();
 
             lastCheckpointIndex = checkpointList.IndexOf(checkpoint);
+            deathBox.transform.position = new Vector3(deathBox.transform.position.x,
+                                                        checkpoint.gameObject.transform.position.y - deathBoxPositionY,
+                                                        deathBox.transform.position.z);
         }
     }
 }
