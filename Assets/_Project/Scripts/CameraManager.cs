@@ -108,7 +108,7 @@ namespace Platformer
 
             //if (isDeviceMouse && !isRMBPressed) return;
 
-            if (PauseManager.Instance.isPaused) return;
+            if (GameManager.Instance.isPaused) return;
             
             // If the device is mouse use fixedDeltaTime, otherwise use deltaTime
             float deviceMultiplier = isDeviceMouse ? Time.fixedDeltaTime :  Time.deltaTime; //Time.fixedDeltaTime for all devices?

@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 
 namespace Platformer
 {
-    public class PauseManager : ValidatedMonoBehaviour
+    public class GameManager : ValidatedMonoBehaviour
     {
-        public static PauseManager Instance;
+        public static GameManager Instance;
 
         [Header("References")]
         [SerializeField, Anywhere] InputReader input;
+        [SerializeField] Transform player;
         [SerializeField] CameraManager cameraManager;
+        [SerializeField] CheckpointsManager checkpointsManager;
         [SerializeField] GameObject canvasPause;
         [SerializeField] GameObject canvasWin;
         [SerializeField] GameObject canvasLose;
@@ -84,9 +86,15 @@ namespace Platformer
 
         public void CloseLose()
         {
-            canvasLose.SetActive(false);
+            canvasLose.SetActive(false);            
             isPaused = false;
             cameraManager.OnEnableMouseControlCamera();
+        }
+
+        public void MovePlayerToCheckpoint()
+        {
+            Vector3 spawnPosition = checkpointsManager.checkpointList[checkpointsManager.lastCheckpointIndex].gameObject.transform.position;
+            player.position = spawnPosition;
         }
     }
 }

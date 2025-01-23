@@ -23,7 +23,7 @@ namespace Platformer
 
         public void UpdateLastCheckpoint(Checkpoint checkpoint)
         {
-            if (checkpoint == checkpointList.Last()) PauseManager.Instance.ShowWin();
+            if (checkpoint == checkpointList.Last()) GameManager.Instance.ShowWin();
 
             lastCheckpointIndex = checkpointList.IndexOf(checkpoint);
             deathBox.transform.position = new Vector3(deathBox.transform.position.x,

@@ -91,7 +91,7 @@ namespace Platformer
 
         void Update()
         {
-            if (!PauseManager.Instance.isPaused) 
+            if (!GameManager.Instance.isPaused) 
                 movement = new Vector3(input.Direction.x, 0f, input.Direction.y);
             else 
                 movement = Vector3.zero;

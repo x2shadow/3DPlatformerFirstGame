@@ -20,24 +20,6 @@ public class PlayerShadow : MonoBehaviour
         SpherecastCheck();
     }
 
-    void RaycastCheck()
-    {
-        if (player != null && shadowObject != null)
-        {
-            // Выполняем лучевой каст вниз от позиции игрока
-            if (Physics.Raycast(player.position + Vector3.up, Vector3.down, out RaycastHit hit, raycastMaxDistance, groundLayer))
-            {
-                // Устанавливаем позицию тени на уровень пересечения с поверхностью
-                Vector3 shadowPosition = new Vector3(player.position.x, hit.point.y + shadowHeightOffset, player.position.z);
-                shadowObject.transform.position = shadowPosition;
-
-                // Изменение размера тени в зависимости от расстояния до поверхности
-                float distanceToGround = hit.distance;
-                shadowObject.transform.localScale = Vector3.one * (shadowSize / Mathf.Max(distanceToGround * shadowScaleSpeed, 1f));
-            }
-        }
-    }
-
     void SpherecastCheck()
     {
         if (player != null && shadowObject != null)

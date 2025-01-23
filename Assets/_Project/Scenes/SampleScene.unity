@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 234356808}
   - component: {fileID: 234356807}
   m_Layer: 0
-  m_Name: PauseManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +497,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 280f47c183f8cd14b85a59432085eeab, type: 2}
+  player: {fileID: 1949842559}
   cameraManager: {fileID: 674645270}
+  checkpointsManager: {fileID: 1862433002}
   canvasPause: {fileID: 1921318510}
   canvasWin: {fileID: 38074037}
   canvasLose: {fileID: 902638176}
@@ -3547,6 +3549,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: {fileID: 459996219}
+--- !u!1 &1487950031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487950032}
+  m_Layer: 0
+  m_Name: --OTHER STUFF--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1487950032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487950031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1542508089
 GameObject:
   m_ObjectHideFlags: 0
@@ -3927,7 +3960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcf541b778d9524b97d93bf1a9c4077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointsManager: {fileID: 1862433002}
 --- !u!65 &1666596149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6055,16 +6087,17 @@ SceneRoots:
   m_Roots:
   - {fileID: 263669632}
   - {fileID: 674645269}
-  - {fileID: 1949842549}
-  - {fileID: 400901701}
-  - {fileID: 295791959}
-  - {fileID: 347760393}
   - {fileID: 234356808}
   - {fileID: 1468159885}
+  - {fileID: 1949842549}
+  - {fileID: 400901701}
+  - {fileID: 1666596152}
+  - {fileID: 295791959}
+  - {fileID: 347760393}
+  - {fileID: 1487950032}
   - {fileID: 329546682}
   - {fileID: 441019942}
   - {fileID: 182347784}
   - {fileID: 1790440617}
   - {fileID: 1948586886}
-  - {fileID: 1666596152}
   - {fileID: 1714822145}
