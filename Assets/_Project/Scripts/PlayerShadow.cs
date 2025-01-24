@@ -36,7 +36,7 @@ public class PlayerShadow : MonoBehaviour
                     Vector3 platformPosition = movingPlatform.transform.position;
                     Vector3 playerOffset = player.position - platformPosition;
                     
-                    shadowPosition = platformPosition + new Vector3(playerOffset.x, 0.055f, playerOffset.z);
+                    shadowPosition = platformPosition + new Vector3(playerOffset.x, 0.255f, playerOffset.z);
                 }
                 
                 // Линейная интерполяция для осей X и Z

@@ -9,20 +9,20 @@ namespace Platformer
     {
         public void LoadFirstLevel()
         {
-            SceneManager.LoadScene("SampleScene");
-            //SceneManager.LoadScene("Level1");
+            //SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level1");
         }
 
         public void LoadSecondLevel()
         {
-            Debug.Log("SceneManager.LoadScene(Level2)");
-            //SceneManager.LoadScene("Level2");
+            //Debug.Log("SceneManager.LoadScene(Level2)");
+            SceneManager.LoadScene("Level2");
         }
 
         public void LoadThirdLevel()
         {
-            Debug.Log("SceneManager.LoadScene(Level3)");
-            //SceneManager.LoadScene("Level3");
+            //Debug.Log("SceneManager.LoadScene(Level3)");
+            SceneManager.LoadScene("Level3");
         }
 
         public void ShowSettings()
