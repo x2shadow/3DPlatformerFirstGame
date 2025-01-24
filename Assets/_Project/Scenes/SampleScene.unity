@@ -5908,16 +5908,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpingPlatform
       objectReference: {fileID: 0}
-    - target: {fileID: 10039947196010767, guid: 20ba98d10eca570458992ef846b4c052,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491945398377079375, guid: 20ba98d10eca570458992ef846b4c052,
-        type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4188459724800542942, guid: 20ba98d10eca570458992ef846b4c052,
         type: 3}
       propertyPath: m_LocalPosition.x
