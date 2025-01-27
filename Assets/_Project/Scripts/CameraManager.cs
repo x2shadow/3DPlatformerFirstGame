@@ -13,7 +13,7 @@ namespace Platformer
         [SerializeField] Camera mainCamera;
 
         [Header("Setting")]
-        [SerializeField] Vector3 offset = new Vector3(0f, 8f, -10f); // Смещение камеры относительно игрока
+        [SerializeField] Vector3 offset = new Vector3(0f, 0f, -9f); // Смещение камеры относительно игрока
         [SerializeField] float followSpeed = 5000f; // Скорость следования камеры
         [SerializeField, Range(0.5f, 10f)] float speedMultiplier = 3f;
 
@@ -65,7 +65,7 @@ namespace Platformer
             // Вычисляем радиус на основе вертикального угла
             float baseRadius = offset.magnitude; // Базовый радиус (изначальное расстояние)
             float verticalFactor = Mathf.InverseLerp(minY, maxY, currentRotation.y); // Нормализуем угол
-            float dynamicRadius = Mathf.Lerp(baseRadius * 0.5f, baseRadius, verticalFactor); // Радиус уменьшается, когда камера опускается
+            float dynamicRadius = Mathf.Lerp(baseRadius, baseRadius * 0.85f, verticalFactor); // Радиус уменьшается, когда камера опускается
 
             // Конвертируем углы в позицию камеры в мировых координатах
             float horizontalAngle = currentRotation.x; // Горизонтальный угол

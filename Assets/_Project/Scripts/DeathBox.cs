@@ -13,6 +13,7 @@ namespace Platformer
             {
                 GameManager.Instance.ShowLose();
                 GameManager.Instance.MovePlayerToCheckpoint();
+                AudioManager.Instance.PlaySoundLose();
             }
         }
     }

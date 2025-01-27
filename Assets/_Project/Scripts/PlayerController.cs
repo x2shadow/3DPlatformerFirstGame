@@ -147,6 +147,8 @@ namespace Platformer
 
             if (jumpTimer.IsRunning)
             {
+                AudioManager.Instance.PlaySoundJump();
+
                 // Высчитываем фиксированную скорость прыжка
                 float initialJumpVelocity = Mathf.Sqrt(2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
 
@@ -184,6 +186,8 @@ namespace Platformer
         {
             if (boostTimer.IsRunning)
             {
+                AudioManager.Instance.PlaySoundJump();
+
                 isBoosted = true; // Устанавливаем состояние буста
                 
                 // Устанавливаем начальную скорость

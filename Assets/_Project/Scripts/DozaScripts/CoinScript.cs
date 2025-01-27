@@ -47,6 +47,7 @@ public class CoinScript : MonoBehaviour
             PlayerData.AddCoins(1);
             int n = PlayerData.GetCoinsNumber();
             CoinManager.Instance.SetCoinsNumber(n);
+            AudioManager.Instance.PlaySoundCoin();
             Debug.Log($"Добавлена 1 монета, Счет:{n}");
             await PickUpAnimation();
         }
