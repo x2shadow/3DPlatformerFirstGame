@@ -22,7 +22,6 @@ namespace Platformer
         [SerializeField] float smoothTime = 0.2f;
 
         [Header("Jump Settings")]
-        //[SerializeField] float jumpForce = 10f;
         [SerializeField] float jumpDuration = 0.5f;
         [SerializeField] float jumpCooldown = 0f;
         [SerializeField] float jumpMaxHeight = 2f;
@@ -46,6 +45,7 @@ namespace Platformer
 
         // Animator parameters
         static readonly int Speed = Animator.StringToHash("Speed");
+        static readonly int Jump = Animator.StringToHash("Jump");
 
         void Awake()
         {
@@ -148,6 +148,7 @@ namespace Platformer
             if (jumpTimer.IsRunning)
             {
                 AudioManager.Instance.PlaySoundJump();
+                animator.SetTrigger(Jump);
 
                 // Высчитываем фиксированную скорость прыжка
                 float initialJumpVelocity = Mathf.Sqrt(2 * jumpMaxHeight * Mathf.Abs(Physics.gravity.y));
@@ -187,6 +188,7 @@ namespace Platformer
             if (boostTimer.IsRunning)
             {
                 AudioManager.Instance.PlaySoundJump();
+                animator.SetTrigger(Jump);
 
                 isBoosted = true; // Устанавливаем состояние буста
                 
