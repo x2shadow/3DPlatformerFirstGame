@@ -12647,6 +12647,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1499645179335958658, guid: aa719ee63ff415f47ade61502a5b4633,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1499645179335958658, guid: aa719ee63ff415f47ade61502a5b4633,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1499645179335958658, guid: aa719ee63ff415f47ade61502a5b4633,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1499645179335958658, guid: aa719ee63ff415f47ade61502a5b4633,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.5
       objectReference: {fileID: 0}
@@ -18747,7 +18762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointList: []
   deathBox: {fileID: 1914457143}
-  deathBoxPositionY: 8
+  deathBoxPositionY: 5
   lastCheckpointIndex: 0
 --- !u!1001 &6709334710577811514
 PrefabInstance:

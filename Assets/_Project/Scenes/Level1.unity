@@ -989,7 +989,7 @@ PrefabInstance:
     - target: {fileID: 1755646449435474077, guid: d83c17476d42bed428c6ca29060d25ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755646449435474077, guid: d83c17476d42bed428c6ca29060d25ba,
         type: 3}
@@ -1222,7 +1222,7 @@ PrefabInstance:
     - target: {fileID: 7027548778112446868, guid: e8d50dcb7b163d741bdf072de7a0ba2e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7027548778112446868, guid: e8d50dcb7b163d741bdf072de7a0ba2e,
         type: 3}
@@ -1291,7 +1291,7 @@ PrefabInstance:
     - target: {fileID: 1755646449435474077, guid: d83c17476d42bed428c6ca29060d25ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755646449435474077, guid: d83c17476d42bed428c6ca29060d25ba,
         type: 3}
@@ -1385,7 +1385,7 @@ PrefabInstance:
     - target: {fileID: 6545363092961920474, guid: 478626b2c81f0314e907e42e4e44603b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6545363092961920474, guid: 478626b2c81f0314e907e42e4e44603b,
         type: 3}
@@ -1579,7 +1579,7 @@ PrefabInstance:
     - target: {fileID: 1755646449435474077, guid: d83c17476d42bed428c6ca29060d25ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755646449435474077, guid: d83c17476d42bed428c6ca29060d25ba,
         type: 3}
@@ -7364,7 +7364,7 @@ PrefabInstance:
     - target: {fileID: 6545363092961920474, guid: 478626b2c81f0314e907e42e4e44603b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6545363092961920474, guid: 478626b2c81f0314e907e42e4e44603b,
         type: 3}
@@ -11401,7 +11401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointList: []
   deathBox: {fileID: 319367818}
-  deathBoxPositionY: 8
+  deathBoxPositionY: 5
   lastCheckpointIndex: 0
 --- !u!1001 &6709334710577811514
 PrefabInstance:
