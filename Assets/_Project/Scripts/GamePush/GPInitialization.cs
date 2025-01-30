@@ -1,20 +1,20 @@
 using UnityEngine;
 using GamePush;
+using TMPro;
 
 namespace Platformer
 {
     public class GPInitialization : MonoBehaviour
     {
-        private async void Start()
-        {
-            // Проверяем, готов ли плагин
-            await GP_Init.Ready;
-            OnPluginReady();
-        }
+        [SerializeField] TextMeshProUGUI pauseText;
 
-        private void OnPluginReady()
+        private void Start()
         {
-            Debug.Log("Plugin ready");
+            if (GP_Language.Current() == Language.English) 
+            {
+                pauseText.text = "Pause";
+                Debug.Log("Pause text changed to English");
+            }
         }
     }
 }
