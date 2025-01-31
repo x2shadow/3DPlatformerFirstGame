@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Platformer
 {
@@ -22,8 +23,7 @@ namespace Platformer
         public AudioClip soundCoin;  
         public AudioClip soundJump;  
         public AudioClip soundLose;  
-        public AudioClip soundWin;  
-
+        public AudioClip soundWin;
         
         void Awake()
         {
@@ -50,6 +50,7 @@ namespace Platformer
             soundSource = gameObject.AddComponent<AudioSource>();
             soundSource.playOnAwake = false;
             soundSource.volume = soundVolume;
+
         }
 
         public void SetMusicVolume(float volume)
