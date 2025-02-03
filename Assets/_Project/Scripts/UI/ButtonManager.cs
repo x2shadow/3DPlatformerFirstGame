@@ -29,14 +29,5 @@ namespace Platformer
         {
             Debug.Log("Open Settings");
         }
-
-        //Doza
-        //public void LoadLevel(int n)//requires certain levelname structure
-        //{
-        //    n = Mathf.Abs(n);
-        //    string level = "Level" + n;
-        //    SceneManager.LoadScene(level);
-        //}
-        //Doza
     }
 }

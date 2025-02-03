@@ -147,5 +147,10 @@ namespace Platformer
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        public void SetCameraSensitivity(float value)
+        {
+            speedMultiplier = value;
+        }
     }
 }

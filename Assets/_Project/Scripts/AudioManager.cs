@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 namespace Platformer
@@ -12,6 +13,7 @@ namespace Platformer
         
         [HideInInspector] public AudioSource musicSource; 
         [HideInInspector] public AudioSource soundSource;
+        public AudioMixer audioMixer;
 
         [Header("Volume")]
         [SerializeField, Range(0f, 1f)] float musicVolume = 1f;
@@ -43,24 +45,30 @@ namespace Platformer
             musicSource = gameObject.AddComponent<AudioSource>();
             musicSource.clip = musicClip;
             musicSource.loop = true; 
-            musicSource.playOnAwake = true; // Музыка начнет играть автоматически
+            musicSource.playOnAwake = true; 
             musicSource.volume = musicVolume;
+            musicSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Music")[0];
             musicSource.Play();
 
             soundSource = gameObject.AddComponent<AudioSource>();
             soundSource.playOnAwake = false;
             soundSource.volume = soundVolume;
+            soundSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Sound")[0];
 
         }
 
         public void SetMusicVolume(float volume)
         {
-            musicSource.volume = volume;
+            float dB = Mathf.Log10(Mathf.Max(volume, 0.0001f)) * 20;
+            audioMixer.SetFloat("MusicVolume", dB);
+            //musicSource.volume = volume;
         }
 
         public void SetSoundVolume(float volume)
         {
-            soundSource.volume = volume;
+            float dB = Mathf.Log10(Mathf.Max(volume, 0.0001f)) * 20;
+            audioMixer.SetFloat("SoundVolume", dB);
+            //soundSource.volume = volume;
         }
 
         public void PlaySoundCheckpoint()

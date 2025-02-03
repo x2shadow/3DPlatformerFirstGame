@@ -46,8 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 0}
   soundSource: {fileID: 0}
-  musicVolume: 0.1
-  soundVolume: 0.8
+  audioMixer: {fileID: 24100000, guid: 6a69b2b064ef0f64db31830a18b4a6ff, type: 2}
+  musicVolume: 0.5
+  soundVolume: 1
   musicClip: {fileID: 8300000, guid: 76a8ec462da54a447ad8b67282ad098b, type: 3}
   soundCheckpoint: {fileID: 8300000, guid: 1360af031c0480a4c81f608ac0e5b757, type: 3}
   soundCoin: {fileID: 8300000, guid: 91ab7c0395e3c0c4da3b828e23a8191e, type: 3}

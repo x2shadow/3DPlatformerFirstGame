@@ -29,7 +29,6 @@ namespace Platformer
                     p.Play();
                 }
             }
-            //show rewarded go to next checkpoint(cm)
         }
 
     }
