@@ -28,6 +28,8 @@ namespace Platformer
 
         void Start()
         {
+            speedMultiplier = PlayerPrefs.GetFloat("CameraSensitivity", 3f); 
+            
             // Lock the cursor to the center of the screen and hide it
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -151,6 +153,8 @@ namespace Platformer
         public void SetCameraSensitivity(float value)
         {
             speedMultiplier = value;
+            PlayerPrefs.SetFloat("CameraSensitivity", value); 
+            PlayerPrefs.Save(); 
         }
     }
 }

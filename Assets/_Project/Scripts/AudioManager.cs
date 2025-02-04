@@ -13,11 +13,9 @@ namespace Platformer
         
         [HideInInspector] public AudioSource musicSource; 
         [HideInInspector] public AudioSource soundSource;
+        private const string MusicVolumeKey = "MusicVolume";
+        private const string SoundVolumeKey = "SoundVolume";
         public AudioMixer audioMixer;
-
-        [Header("Volume")]
-        [SerializeField, Range(0f, 1f)] float musicVolume = 1f;
-        [SerializeField, Range(0f, 1f)] float soundVolume = 1f;
 
         [Header("AudioClips")]
         public AudioClip musicClip; 
@@ -46,29 +44,36 @@ namespace Platformer
             musicSource.clip = musicClip;
             musicSource.loop = true; 
             musicSource.playOnAwake = true; 
-            musicSource.volume = musicVolume;
+            musicSource.volume = 1f;
+            float dB = Mathf.Log10(Mathf.Max(PlayerPrefs.GetFloat(MusicVolumeKey, 0.5f), 0.0001f)) * 20;
+            audioMixer.SetFloat("MusicVolume", dB);
             musicSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Music")[0];
             musicSource.Play();
 
             soundSource = gameObject.AddComponent<AudioSource>();
             soundSource.playOnAwake = false;
-            soundSource.volume = soundVolume;
+            soundSource.volume = 1f;
+            dB = Mathf.Log10(Mathf.Max(PlayerPrefs.GetFloat(SoundVolumeKey, 0.5f), 0.0001f)) * 20;
+            audioMixer.SetFloat("SoundVolume", dB);
             soundSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Sound")[0];
-
         }
 
         public void SetMusicVolume(float volume)
         {
             float dB = Mathf.Log10(Mathf.Max(volume, 0.0001f)) * 20;
             audioMixer.SetFloat("MusicVolume", dB);
-            //musicSource.volume = volume;
+
+            PlayerPrefs.SetFloat(MusicVolumeKey, volume); 
+            PlayerPrefs.Save(); 
         }
 
         public void SetSoundVolume(float volume)
         {
             float dB = Mathf.Log10(Mathf.Max(volume, 0.0001f)) * 20;
             audioMixer.SetFloat("SoundVolume", dB);
-            //soundSource.volume = volume;
+
+            PlayerPrefs.SetFloat(SoundVolumeKey, volume); 
+            PlayerPrefs.Save(); 
         }
 
         public void PlaySoundCheckpoint()
