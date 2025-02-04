@@ -23,14 +23,21 @@ public static class PlayerData
         }
     }
 
+    public static void SetZeroCoins()
+    {
+        Coins = 0;
+    }
+
     public static int GetCoinsNumber()
     {
         return Coins;
     }
+
     public static void AddCoins(int n)
     {
         Coins += n;
     }
+
     public static bool SpendCoins(int n)
     {
         if (Coins < n)
@@ -43,14 +50,4 @@ public static class PlayerData
             return true;
         }
     }
-    public static void Save()
-    {
-        //target device serialization or ServerSave(via SDK)
-    }
-    public static void Load()
-    {
-
-    }
-    
-
 }

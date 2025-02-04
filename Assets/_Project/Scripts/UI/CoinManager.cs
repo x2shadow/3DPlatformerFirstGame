@@ -26,6 +26,7 @@ namespace Platformer
 
         void Start()
         {
+            PlayerData.SetZeroCoins();
             coins.text = PlayerData.GetCoinsNumber().ToString();
         }
 
