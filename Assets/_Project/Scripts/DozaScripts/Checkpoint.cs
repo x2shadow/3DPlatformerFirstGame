@@ -16,19 +16,49 @@ namespace Platformer
         {
             cm = this.GetComponentInParent<CheckpointsManager>();
         }
-        private void OnTriggerEnter(Collider other)
+
+        async void OnTriggerEnter(Collider other)//async with animation
         {
             if (!marked)
             {
                 marked = true;
-                cm.UpdateLastCheckpoint(this);
-                this.gameObject.SetActive(false);
-
+                try
+                {
+                    cm.UpdateLastCheckpoint(this);
+                }
+                catch { }
                 foreach (ParticleSystem p in _particles)
                 {
                     p.Play();
                 }
             }
+            //show rewarded?
+            await SizeAnimation();
+        }
+
+        CancellationTokenSource cts;
+        public float animTime;
+        public AnimationCurve scaleCurve;
+        async UniTask SizeAnimation()
+        {
+            float time = 0;
+
+            using (var _cts = new CancellationTokenSource())
+            {
+                cts = _cts;
+                Vector3 initialScale = this.transform.localScale;
+                while (time <= animTime)
+                {
+                    time += Time.deltaTime;
+                    try
+                    {
+                        this.transform.localScale = initialScale * scaleCurve.Evaluate(time);
+                    }
+                    catch { }
+                    await UniTask.Yield();//give control back to main thread
+                }
+            }
+            this.gameObject.SetActive(false);
         }
 
     }
