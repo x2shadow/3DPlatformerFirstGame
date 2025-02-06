@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using System.Linq;
 
 namespace Platformer
 {
@@ -27,18 +28,24 @@ namespace Platformer
                     cm.UpdateLastCheckpoint(this);
                 }
                 catch { }
-                foreach (ParticleSystem p in _particles)
+
+                // If not first Checkpoint
+                if(this != cm.checkpointList.First()) 
                 {
-                    p.Play();
+                    foreach (ParticleSystem p in _particles)
+                    {
+                        p.Play();
+                    }
                 }
+
+                await SizeAnimation();
             }
-            //show rewarded?
-            await SizeAnimation();
         }
 
         CancellationTokenSource cts;
         public float animTime;
         public AnimationCurve scaleCurve;
+
         async UniTask SizeAnimation()
         {
             float time = 0;

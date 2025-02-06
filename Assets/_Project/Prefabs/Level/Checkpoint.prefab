@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565016782669499080}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -167,6 +167,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7027548778112446868}
     m_Modifications:
+    - target: {fileID: 1215319522127244577, guid: 6fad609eed25ede42b1d7b727e9a4d20,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1511196102744543589, guid: 6fad609eed25ede42b1d7b727e9a4d20,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -221,6 +226,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CheckpointParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124430078722466392, guid: 6fad609eed25ede42b1d7b727e9a4d20,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5439664570435450349, guid: 6fad609eed25ede42b1d7b727e9a4d20,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701219987074743105, guid: 6fad609eed25ede42b1d7b727e9a4d20,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
