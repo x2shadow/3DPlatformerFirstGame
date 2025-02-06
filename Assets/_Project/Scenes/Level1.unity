@@ -2117,18 +2117,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d83c17476d42bed428c6ca29060d25ba, type: 3}
---- !u!114 &448826143 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9179845394395877654, guid: 086f499173058d243b7d6d0f42c825fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 5278720579469627037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b445149c257a47f4481407da9f5b94bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &455670508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8764,30 +8752,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5544850155710649933, guid: 5ca10c5fa5e71744087089d307a7f99a,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1265734302}
-    - target: {fileID: 5544850155710649933, guid: 5ca10c5fa5e71744087089d307a7f99a,
-        type: 3}
-      propertyPath: cameraManager
-      value: 
-      objectReference: {fileID: 448826143}
-    - target: {fileID: 5544850155710649933, guid: 5ca10c5fa5e71744087089d307a7f99a,
-        type: 3}
-      propertyPath: checkpointsManager
-      value: 
-      objectReference: {fileID: 6472815464845079476}
     - target: {fileID: 6818897240098210742, guid: 5ca10c5fa5e71744087089d307a7f99a,
         type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8690575899145230182, guid: 5ca10c5fa5e71744087089d307a7f99a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8979,8 +8947,8 @@ SceneRoots:
   - {fileID: 1543207473}
   - {fileID: 5278720579469627037}
   - {fileID: 3122720022720845271}
-  - {fileID: 7142778414798966910}
   - {fileID: 1416414163}
   - {fileID: 1826983284}
   - {fileID: 992490996575596193}
   - {fileID: 565153120}
+  - {fileID: 7142778414798966910}

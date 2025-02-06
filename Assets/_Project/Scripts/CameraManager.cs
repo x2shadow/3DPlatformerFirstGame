@@ -113,7 +113,7 @@ namespace Platformer
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-                if (touch.position.x < Screen.width * 0.3f) return; // Игнорируем левую половину экрана
+                if (touch.position.x < Screen.width * 0.4f) return; // Игнорируем левую половину экрана
             }
 
             if (GameManager.Instance.isPaused) return;
