@@ -9,4 +9,5 @@ Our first 3D Platformer game
 - NEW Unity Input System
 - UniTask
 - TextMesh Pro
+- [Safe Area Helper] (https://assetstore.unity.com/packages/tools/gui/safe-area-helper-130488)
 

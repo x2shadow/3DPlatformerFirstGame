@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GamePush;
 using KBCore.Refs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,9 @@ namespace Platformer
         [SerializeField] GameObject canvasPause;
         [SerializeField] GameObject canvasWin;
         [SerializeField] GameObject canvasLose;
+        [SerializeField] GameObject tabIcon;
+        [SerializeField] GameObject textPause;
+        [SerializeField] GameObject canvasMobile;
 
         public bool isPaused;
 
@@ -30,6 +34,16 @@ namespace Platformer
             else
             {
                 Instance = this;
+            }
+        }
+
+        void Start()
+        {
+            if (Application.isMobilePlatform)
+            {
+                tabIcon.SetActive(false);
+                textPause.SetActive(false);
+                canvasMobile.SetActive(true);
             }
         }
 
