@@ -110,6 +110,12 @@ namespace Platformer
 
             //if (isDeviceMouse && !isRMBPressed) return;
 
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.position.x < Screen.width * 0.3f) return; // Игнорируем левую половину экрана
+            }
+
             if (GameManager.Instance.isPaused) return;
             
             // If the device is mouse use fixedDeltaTime, otherwise use deltaTime
