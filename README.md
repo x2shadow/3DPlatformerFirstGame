@@ -1,6 +1,6 @@
-# 3DPlatformerFirstGame
+# Escape from Candy Tower
 
-Our first 3D Platformer game
+X2FROST studio's first 3D Platformer game
 
 ### Requirements
 
